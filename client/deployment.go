@@ -33,15 +33,23 @@ func UpdateDeployments(client *kubernetes.Clientset, namespace, deploymentName, 
 				found = true
 				utils.Info.Println("Current container image ->", c[i].Image)
 				utils.Info.Println("New image of harbor registry ->", imageName)
-				c[i].Image = imageName
+				if c[i].Image == imageName {
+					utils.Info.Println("The application container image is new")
+					continue
+				} else {
+					c[i].Image = imageName
+					if found == false {
+						utils.Error.Println("The application container not exist in the deployment pods.")
+						utils.Info.Println("test")
+						_, err := client.AppsV1().Deployments(namespace).Update(context.TODO(), deployment, metav1.UpdateOptions{})
+						if err != nil {
+							utils.Error.Panic(err)
+						}
+					}
+				}
+
 			}
 		}
-		if found == false {
-			utils.Error.Println("The application container not exist in the deployment pods.")
-		}
-		_, err := client.AppsV1().Deployments(namespace).Update(context.TODO(), deployment, metav1.UpdateOptions{})
-		if err != nil {
-			utils.Error.Panic(err)
-		}
+
 	}
 }
