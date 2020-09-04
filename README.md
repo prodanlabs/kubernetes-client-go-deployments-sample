@@ -18,11 +18,11 @@ Usage of ./app:
   -cluster string
         out-of or in cluster. (default "in-cluster")
   -pass string
-        passwd for harbor. (default "HarBor12345")
+        passwd for harbor. (default "Harbor12345")
   -project string
         app harbor projectName. (default "os")
   -registry string
-        url for harbor. (default "harbor.junengcloud.com")
+        url for harbor. (default "harbor.xxx.com")
   -user string
         username for harbor. (default "admin")
   -v    version
