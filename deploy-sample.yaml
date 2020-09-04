@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: client-go-deploy
-          image: docker.io/prodan/client-go-deploy:v1.0
+          image: docker.io/prodan/client-go-deploy:v1.1
           imagePullPolicy: IfNotPresent
           env:
 #            - name: CLUSTER_ENV
