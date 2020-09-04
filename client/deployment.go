@@ -33,9 +33,6 @@ func UpdateDeployments(client *kubernetes.Clientset, namespace, deploymentName, 
 				found = true
 				utils.Info.Println("Current container image ->", c[i].Image)
 				utils.Info.Println("New image of harbor registry ->", imageName)
-				if c[i].Image == imageName {
-					utils.Info.Println("The application container image is new")
-				}
 				c[i].Image = imageName
 				if found == false {
 					utils.Error.Println("The application container not exist in the deployment pods.")
