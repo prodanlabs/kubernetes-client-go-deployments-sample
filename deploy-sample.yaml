@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-go-deploy
+  namespace: kube-system
+  labels:
+    k8s-app: client-go-deploy
+spec:
+  replicas: 1
+  minReadySeconds: 120
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      k8s-app: client-go-deploy
+  template:
+    metadata:
+      labels:
+        k8s-app: client-go-deploy
+    spec:
+      containers:
+        - name: client-go-deploy
+          image: docker.io/prodan/client-go-deploy:v1.0
+          imagePullPolicy: IfNotPresent
+          env:
+#            - name: CLUSTER_ENV
+#              value: "in-cluster"
+            - name: HARBOR_USER
+              value: "admin"
+            - name: HARBOR_PASS
+              value: "Harbor12345"
+            - name: HARBOR_URL
+              value: "harbor.xxx.com"
+            - name: HARBOR_PROJECT
+              value: "os"
+            - name: APPLICATION_GROUP
+              value: "kube-system.busybox.alpine,default.busybox2.alpine"
