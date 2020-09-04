@@ -40,12 +40,13 @@ func UpdateDeployments(client *kubernetes.Clientset, namespace, deploymentName, 
 					c[i].Image = imageName
 					if found == false {
 						utils.Error.Println("The application container not exist in the deployment pods.")
-						utils.Info.Println("test")
-						_, err := client.AppsV1().Deployments(namespace).Update(context.TODO(), deployment, metav1.UpdateOptions{})
-						if err != nil {
-							utils.Error.Panic(err)
-						}
 					}
+					utils.Info.Println("--------update-------")
+					_, err := client.AppsV1().Deployments(namespace).Update(context.TODO(), deployment, metav1.UpdateOptions{})
+					if err != nil {
+						utils.Error.Panic(err)
+					}
+
 				}
 
 			}
