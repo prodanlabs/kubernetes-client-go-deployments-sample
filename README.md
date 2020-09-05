@@ -34,7 +34,7 @@ root@client-go-deploy-68857c6778-d7h9j:/#
 | CLUSTER_ENV       | 默认运行在K8s,如需要运行在集群外,传入变量"out-of-cluster" |
 | HARBOR_USER       | harbor仓库用户                                            |
 | HARBOR_PASS       | harbor仓库密码                                            |
-| HARBOR_URL        | harbor的地址,只支持https,如:harbor.junengcloud.com        |
+| HARBOR_URL        | harbor的地址,只支持https,如:harbor.xxx.com        |
 | HARBOR_PROJECT    | harbor仓库的项目名                                        |
 | APPLICATION_GROUP | 要更新的deploy信息, "命名空间.deploy名.容器名"            |
 
