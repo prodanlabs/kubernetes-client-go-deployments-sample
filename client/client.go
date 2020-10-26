@@ -10,12 +10,6 @@ import (
 	"path/filepath"
 )
 
-func homeDir() string {
-	if h := os.Getenv("HOME"); h != "" {
-		return h
-	}
-	return os.Getenv("USERPROFILE") // windows
-}
 func Connect(env string) (*kubernetes.Clientset, error) {
 	if env == "out-of-cluster" {
 		var kubeconfig *string
@@ -47,4 +41,11 @@ func Connect(env string) (*kubernetes.Clientset, error) {
 		clientset, err := kubernetes.NewForConfig(config)
 		return clientset, err
 	}
+}
+
+func homeDir() string {
+	if h := os.Getenv("HOME"); h != "" {
+		return h
+	}
+	return os.Getenv("USERPROFILE") // windows
 }

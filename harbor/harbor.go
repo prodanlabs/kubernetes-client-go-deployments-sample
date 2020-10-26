@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func GetImages(username,passwd,registry, repositories string) (string, error) {
+func GetImages(username, passwd, registry, repositories string) (string, error) {
 	url := "https://" + registry + "/v2/" + repositories + "/tags/list"
 	// 初始化客户端请求对象
 	req, err := http.NewRequest("GET", url, nil)
@@ -34,17 +34,17 @@ func GetImages(username,passwd,registry, repositories string) (string, error) {
 	strArr := value.Array()
 	if len(strArr) == 0 {
 		utils.Warn.Println("Failed to get harbor registry image")
-		return "0",err
+		return "0", err
 	}
-	maxVal := strArr[0].String()
+	maxVal := strArr[0].Int()
 	maxValIndex := 0
 	for i := 0; i < len(strArr); i++ {
-		if maxVal < strArr[i].String() {
-			maxVal = strArr[i].String()
+		if maxVal < strArr[i].Int() {
+			maxVal = strArr[i].Int()
 			maxValIndex = i
 		}
 	}
-	images := registry + "/" + repositories + ":" + maxVal
+	images := registry + "/" + repositories + ":" + string(maxVal)
 	utils.Info.Printf("The new tag of the %s is: %s, The corresponding index is: %v , Image is: %s\n", repositories, maxVal, maxValIndex, images)
 	return images, err
 }
